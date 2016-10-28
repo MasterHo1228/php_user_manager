@@ -5,287 +5,282 @@
       <visible>1</visible>
     </schema>
     <schema id="2" name="information_schema"/>
-    <schema id="3" name="mvc_study"/>
-    <schema id="4" name="mysql"/>
-    <schema id="5" name="performance_schema"/>
-    <schema id="6" name="phpmyadmin"/>
-    <schema id="7" name="test"/>
-    <table id="8" parent="1" name="adminuser"/>
-    <table id="9" parent="1" name="adminuserloginlog"/>
-    <table id="10" parent="1" name="class"/>
-    <table id="11" parent="1" name="course"/>
-    <table id="12" parent="1" name="student"/>
-    <table id="13" parent="1" name="student_score"/>
-    <view id="14" parent="1" name="viewstudentinfos">
+    <schema id="3" name="mysql"/>
+    <schema id="4" name="performance_schema"/>
+    <schema id="5" name="phpmyadmin"/>
+    <schema id="6" name="test"/>
+    <table id="7" parent="1" name="adminuser"/>
+    <table id="8" parent="1" name="adminuserloginlog"/>
+    <table id="9" parent="1" name="class"/>
+    <table id="10" parent="1" name="course"/>
+    <table id="11" parent="1" name="student"/>
+    <table id="12" parent="1" name="student_score"/>
+    <view id="13" parent="1" name="viewstudentinfos">
       <comment>VIEW</comment>
     </view>
-    <view id="15" parent="1" name="viewstudentscore">
+    <view id="14" parent="1" name="viewstudentscore">
       <comment>VIEW</comment>
     </view>
-    <column id="16" parent="8" name="ID">
+    <column id="15" parent="7" name="ID">
       <mandatory>1</mandatory>
       <data-type>int(10) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="17" parent="8" name="Name">
+    <column id="16" parent="7" name="Name">
       <mandatory>1</mandatory>
       <data-type>varchar(25)|0</data-type>
     </column>
-    <column id="18" parent="8" name="Password">
+    <column id="17" parent="7" name="Password">
       <mandatory>1</mandatory>
       <data-type>varchar(32)|0</data-type>
     </column>
-    <column id="19" parent="8" name="salt">
+    <column id="18" parent="7" name="salt">
       <mandatory>1</mandatory>
       <data-type>char(4)|0</data-type>
     </column>
-    <column id="20" parent="8" name="User_role">
+    <column id="19" parent="7" name="User_role">
       <mandatory>1</mandatory>
       <data-type>varchar(10)|0</data-type>
     </column>
-    <index id="21" parent="8" name="Name">
+    <index id="20" parent="7" name="Name">
       <columns>Name</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="22" parent="8" name="PRIMARY">
+    <key id="21" parent="7" name="PRIMARY">
       <columns>ID</columns>
       <primary>1</primary>
     </key>
-    <key id="23" parent="8" name="Name">
+    <key id="22" parent="7" name="Name">
       <columns>Name</columns>
       <underlying-index>Name</underlying-index>
     </key>
-    <column id="24" parent="9" name="AdminID">
+    <column id="23" parent="8" name="AdminID">
       <mandatory>1</mandatory>
       <data-type>int(10) unsigned|0</data-type>
     </column>
-    <column id="25" parent="9" name="LastLoginTime">
+    <column id="24" parent="8" name="LastLoginTime">
       <mandatory>1</mandatory>
       <data-type>datetime|0</data-type>
     </column>
-    <column id="26" parent="9" name="LastLoginIP">
+    <column id="25" parent="8" name="LastLoginIP">
       <mandatory>1</mandatory>
       <data-type>varchar(35)|0</data-type>
     </column>
-    <index id="27" parent="9" name="FK_AdminID">
+    <index id="26" parent="8" name="FK_AdminID">
       <columns>AdminID</columns>
       <desc-columns></desc-columns>
     </index>
-    <foreign-key id="28" parent="9" name="FK_AdminID">
+    <foreign-key id="27" parent="8" name="FK_AdminID">
       <columns>AdminID</columns>
       <ref-key>~.adminuser.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <column id="29" parent="10" name="ID">
+    <column id="28" parent="9" name="ID">
       <mandatory>1</mandatory>
       <data-type>int(10) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="30" parent="10" name="Grade">
+    <column id="29" parent="9" name="Grade">
       <mandatory>1</mandatory>
       <data-type>year(4)|0</data-type>
     </column>
-    <column id="31" parent="10" name="Name">
+    <column id="30" parent="9" name="Name">
       <mandatory>1</mandatory>
       <data-type>varchar(30)|0</data-type>
     </column>
-    <column id="32" parent="10" name="Sum_students">
+    <column id="31" parent="9" name="Max_students">
       <mandatory>1</mandatory>
       <data-type>int(10) unsigned|0</data-type>
     </column>
-    <column id="33" parent="10" name="Max_students">
-      <mandatory>1</mandatory>
-      <data-type>int(10) unsigned|0</data-type>
-    </column>
-    <key id="34" parent="10" name="PRIMARY">
+    <key id="32" parent="9" name="PRIMARY">
       <columns>ID</columns>
       <primary>1</primary>
     </key>
-    <column id="35" parent="11" name="ID">
+    <column id="33" parent="10" name="ID">
       <mandatory>1</mandatory>
       <data-type>int(10) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="36" parent="11" name="Name">
+    <column id="34" parent="10" name="Name">
       <mandatory>1</mandatory>
       <data-type>varchar(35)|0</data-type>
     </column>
-    <column id="37" parent="11" name="Credit">
+    <column id="35" parent="10" name="Credit">
       <mandatory>1</mandatory>
-      <data-type>decimal(2,1)|0</data-type>
+      <data-type>decimal(2,1) unsigned|0</data-type>
     </column>
-    <key id="38" parent="11" name="PRIMARY">
+    <key id="36" parent="10" name="PRIMARY">
       <columns>ID</columns>
       <primary>1</primary>
     </key>
-    <column id="39" parent="12" name="ID">
+    <column id="37" parent="11" name="ID">
       <mandatory>1</mandatory>
       <data-type>bigint(20) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="40" parent="12" name="Name">
+    <column id="38" parent="11" name="Name">
       <mandatory>1</mandatory>
       <data-type>varchar(15)|0</data-type>
     </column>
-    <column id="41" parent="12" name="Gender">
+    <column id="39" parent="11" name="Gender">
       <data-type>enum(&apos;male&apos;, &apos;female&apos;)|0</data-type>
     </column>
-    <column id="42" parent="12" name="Age">
+    <column id="40" parent="11" name="Age">
       <data-type>tinyint(3) unsigned|0</data-type>
     </column>
-    <column id="43" parent="12" name="DateOfBirth">
+    <column id="41" parent="11" name="DateOfBirth">
       <data-type>date|0</data-type>
     </column>
-    <column id="44" parent="12" name="BirthPlace">
+    <column id="42" parent="11" name="BirthPlace">
       <data-type>varchar(15)|0</data-type>
     </column>
-    <column id="45" parent="12" name="Nationality">
+    <column id="43" parent="11" name="Nationality">
       <data-type>varchar(20)|0</data-type>
     </column>
-    <column id="46" parent="12" name="Class_ID">
+    <column id="44" parent="11" name="Class_ID">
       <mandatory>1</mandatory>
       <data-type>int(10) unsigned|0</data-type>
     </column>
-    <column id="47" parent="12" name="Home_addr">
+    <column id="45" parent="11" name="Home_addr">
       <data-type>varchar(50)|0</data-type>
     </column>
-    <column id="48" parent="12" name="Politic">
+    <column id="46" parent="11" name="Politic">
       <data-type>varchar(10)|0</data-type>
     </column>
-    <column id="49" parent="12" name="ID_Number">
+    <column id="47" parent="11" name="ID_Number">
       <data-type>varchar(18)|0</data-type>
     </column>
-    <column id="50" parent="12" name="Job">
+    <column id="48" parent="11" name="Job">
       <data-type>varchar(15)|0</data-type>
     </column>
-    <column id="51" parent="12" name="Major">
+    <column id="49" parent="11" name="Major">
       <data-type>varchar(15)|0</data-type>
     </column>
-    <index id="52" parent="12" name="FK_ClassID">
+    <index id="50" parent="11" name="FK_ClassID">
       <columns>Class_ID</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="53" parent="12" name="PRIMARY">
+    <key id="51" parent="11" name="PRIMARY">
       <columns>ID</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="54" parent="12" name="FK_ClassID">
+    <foreign-key id="52" parent="11" name="FK_ClassID">
       <columns>Class_ID</columns>
       <ref-key>~.class.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <column id="55" parent="13" name="Course_ID">
+    <column id="53" parent="12" name="Course_ID">
       <mandatory>1</mandatory>
       <data-type>int(10) unsigned|0</data-type>
     </column>
-    <column id="56" parent="13" name="Student_ID">
+    <column id="54" parent="12" name="Student_ID">
       <mandatory>1</mandatory>
       <data-type>bigint(20) unsigned|0</data-type>
     </column>
-    <column id="57" parent="13" name="Score">
+    <column id="55" parent="12" name="Score">
       <mandatory>1</mandatory>
       <data-type>tinyint(3) unsigned|0</data-type>
     </column>
-    <column id="58" parent="13" name="Semester">
+    <column id="56" parent="12" name="Semester">
       <mandatory>1</mandatory>
       <data-type>tinyint(1) unsigned|0</data-type>
     </column>
-    <column id="59" parent="13" name="School_year">
+    <column id="57" parent="12" name="School_year">
       <mandatory>1</mandatory>
       <data-type>year(4)|0</data-type>
     </column>
-    <index id="60" parent="13" name="FK_CourseID">
+    <index id="58" parent="12" name="FK_CourseID">
       <columns>Course_ID</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="61" parent="13" name="FK_StudentID">
+    <index id="59" parent="12" name="FK_StudentID">
       <columns>Student_ID</columns>
       <desc-columns></desc-columns>
     </index>
-    <foreign-key id="62" parent="13" name="FK_CourseID">
+    <foreign-key id="60" parent="12" name="FK_CourseID">
       <columns>Course_ID</columns>
       <ref-key>~.course.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="63" parent="13" name="FK_StudentID">
+    <foreign-key id="61" parent="12" name="FK_StudentID">
       <columns>Student_ID</columns>
       <ref-key>~.student.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <column id="64" parent="14" name="ID">
+    <column id="62" parent="13" name="ID">
       <mandatory>1</mandatory>
       <data-type>bigint(20) unsigned|0</data-type>
       <default-expression>&apos;0&apos;</default-expression>
     </column>
-    <column id="65" parent="14" name="StudentName">
+    <column id="63" parent="13" name="StudentName">
       <mandatory>1</mandatory>
       <data-type>varchar(15)|0</data-type>
     </column>
-    <column id="66" parent="14" name="Gender">
+    <column id="64" parent="13" name="Gender">
       <data-type>enum(&apos;male&apos;, &apos;female&apos;)|0</data-type>
     </column>
-    <column id="67" parent="14" name="Age">
+    <column id="65" parent="13" name="Age">
       <data-type>tinyint(3) unsigned|0</data-type>
     </column>
-    <column id="68" parent="14" name="DateOfBirth">
+    <column id="66" parent="13" name="DateOfBirth">
       <data-type>date|0</data-type>
     </column>
-    <column id="69" parent="14" name="BirthPlace">
+    <column id="67" parent="13" name="BirthPlace">
       <data-type>varchar(15)|0</data-type>
     </column>
-    <column id="70" parent="14" name="Nationality">
+    <column id="68" parent="13" name="Nationality">
       <data-type>varchar(20)|0</data-type>
     </column>
-    <column id="71" parent="14" name="ClassName">
+    <column id="69" parent="13" name="ClassName">
       <mandatory>1</mandatory>
       <data-type>varchar(30)|0</data-type>
     </column>
-    <column id="72" parent="14" name="Home_addr">
+    <column id="70" parent="13" name="Home_addr">
       <data-type>varchar(50)|0</data-type>
     </column>
-    <column id="73" parent="14" name="Politic">
+    <column id="71" parent="13" name="Politic">
       <data-type>varchar(10)|0</data-type>
     </column>
-    <column id="74" parent="14" name="ID_Number">
+    <column id="72" parent="13" name="ID_Number">
       <data-type>varchar(18)|0</data-type>
     </column>
-    <column id="75" parent="14" name="Job">
+    <column id="73" parent="13" name="Job">
       <data-type>varchar(15)|0</data-type>
     </column>
-    <column id="76" parent="14" name="Major">
+    <column id="74" parent="13" name="Major">
       <data-type>varchar(15)|0</data-type>
     </column>
-    <column id="77" parent="15" name="Student_ID">
+    <column id="75" parent="14" name="Student_ID">
       <mandatory>1</mandatory>
       <data-type>bigint(20) unsigned|0</data-type>
       <default-expression>&apos;0&apos;</default-expression>
     </column>
-    <column id="78" parent="15" name="StudentName">
+    <column id="76" parent="14" name="StudentName">
       <mandatory>1</mandatory>
       <data-type>varchar(15)|0</data-type>
     </column>
-    <column id="79" parent="15" name="ClassName">
+    <column id="77" parent="14" name="ClassName">
       <mandatory>1</mandatory>
       <data-type>varchar(30)|0</data-type>
     </column>
-    <column id="80" parent="15" name="CourseName">
+    <column id="78" parent="14" name="CourseName">
       <mandatory>1</mandatory>
       <data-type>varchar(35)|0</data-type>
     </column>
-    <column id="81" parent="15" name="Score">
+    <column id="79" parent="14" name="Score">
       <mandatory>1</mandatory>
       <data-type>tinyint(3) unsigned|0</data-type>
     </column>
-    <column id="82" parent="15" name="School_year">
+    <column id="80" parent="14" name="School_year">
       <mandatory>1</mandatory>
       <data-type>year(4)|0</data-type>
     </column>
-    <column id="83" parent="15" name="Semester">
+    <column id="81" parent="14" name="Semester">
       <mandatory>1</mandatory>
       <data-type>tinyint(1) unsigned|0</data-type>
     </column>

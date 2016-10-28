@@ -27,19 +27,7 @@ class mainModel extends model {
             $data['salt'] = $this->genRandomString(4);
             $data['Password'] = $_POST['usrPasswd'].$data['salt'];
 
-            //拼接SQL语句
-            $sql = "insert into `AdminUser` set ";
-            foreach($data as $k=>$v){
-                if ($k == 'Password'){
-                    $sql .= "`$k`=MD5('$v'),";
-                    continue;
-                } else {
-                    $sql .= "`$k`='$v',";
-                }
-            }
-            $sql = rtrim($sql,','); //去掉最右边的逗号
-            //执行SQL并返回
-            return $this->db->query($sql);
+            return $this->InsertData('AdminUser',$data);
         } else {
             return false;
         }
@@ -62,6 +50,9 @@ class mainModel extends model {
                 $data['salt'] = $this->genRandomString(4);
                 $data['Password'] = $_POST['usrPasswd'] . $data['salt'];
             }
+
+            //往管理员表中插入数据
+            //此处的sql代码需要特殊验证，故不用api~
             //拼接SQL语句
             $sql = "update `AdminUser` set ";
             foreach($data as $k=>$v){
@@ -94,14 +85,7 @@ class mainModel extends model {
         $data['Grade'] = $_POST['classGrade'];
         $data['Max_students'] = $_POST['classMaxCount'];
 
-        //拼接SQL语句
-        $sql = "insert into `Class` set ";
-        foreach($data as $k=>$v){
-            $sql .= "`$k`='$v',";
-        }
-        $sql = rtrim($sql,','); //去掉最右边的逗号
-        //执行SQL并返回
-        return $this->db->query($sql);
+        return $this->InsertData('Class',$data);
     }
 
     /**
@@ -116,14 +100,7 @@ class mainModel extends model {
         $data['Name'] = $_POST['courseName'];
         $data['Credit'] = $_POST['courseCredit'];
 
-        //拼接SQL语句
-        $sql = "insert into `Course` set ";
-        foreach($data as $k=>$v){
-            $sql .= "`$k`='$v',";
-        }
-        $sql = rtrim($sql,','); //去掉最右边的逗号
-        //执行SQL并返回
-        return $this->db->query($sql);
+        return $this->InsertData('Course',$data);
     }
 
     /**
@@ -147,14 +124,7 @@ class mainModel extends model {
                 $ins_data['Semester'] = $_POST['semester'];
                 $ins_data['School_year'] = $_POST['schoolYear'];
 
-                //拼接SQL语句
-                $sql = "insert into Student_score set ";
-                foreach($ins_data as $k=>$v){
-                    $sql .= "`$k`='$v',";
-                }
-                $sql = rtrim($sql,','); //去掉最右边的逗号
-                //执行SQL并返回
-                return $this->db->query($sql);
+                return $this->InsertData('Student_score',$ins_data);
             } else {
                 echo '学生不存在！';
                 return false;
@@ -179,15 +149,7 @@ class mainModel extends model {
             $data['Grade'] = $_POST['classGrade'];
             $data['Max_students'] = $_POST['classMaxCount'];
 
-            //拼接SQL语句
-            $sql = "update `Class` set ";
-            foreach($data as $k=>$v){
-                $sql .= "`$k`='$v',";
-            }
-            $sql = rtrim($sql,','); //去掉最右边的逗号
-            $sql .= "where ID={$_POST['classID']}";
-            //执行SQL并返回
-            return $this->db->query($sql);
+            return $this->UpdateData('Class',$data,'ID',$_POST['classID']);
         } else {
             return false;
         }
@@ -206,15 +168,7 @@ class mainModel extends model {
             $data['Name'] = $_POST['courseName'];
             $data['Credit'] = $_POST['courseCredit'];
 
-            //拼接SQL语句
-            $sql = "update `Course` set ";
-            foreach($data as $k=>$v){
-                $sql .= "`$k`='$v',";
-            }
-            $sql = rtrim($sql,','); //去掉最右边的逗号
-            $sql .= "where ID={$_POST['courseID']}";
-            //执行SQL并返回
-            return $this->db->query($sql);
+            return $this->UpdateData('Course',$data,'ID',$_POST['courseID']);
         } else {
             return false;
         }
@@ -225,56 +179,28 @@ class mainModel extends model {
      * @return mixed
      */
     public function insertNewStudent(){
-        //输入过滤
-        $this->filter(array('stuName','stuAge','stuNationality','stuPolitic','stuJob','stuGender','stuDateOfBirth','stuBirthPlace','stuHomeAddr','stuClass','stuIDNum','stuMajor'),'trim');
+        if (isset($_POST)){
+            //输入过滤
+            $this->filter(array('stuName','stuAge','stuNationality','stuPolitic','stuJob','stuGender','stuDateOfBirth','stuBirthPlace','stuHomeAddr','stuClass','stuIDNum','stuMajor'),'trim');
 
-        //接收输入数据
-        $data['Name'] = $_POST['stuName'];
-        $data['Age'] = $_POST['stuAge'];
-        $data['Nationality'] = $_POST['stuNationality'];
-        $data['Politic'] = $_POST['stuPolitic'];
-        $data['Job'] = $_POST['stuJob'];
-        $data['Gender'] = $_POST['stuGender'];
-        $data['DateOfBirth'] = $_POST['stuDateOfBirth'];
-        $data['BirthPlace'] = $_POST['stuBirthPlace'];
-        $data['Home_addr'] = $_POST['stuHomeAddr'];
-        $data['Class_ID'] = $_POST['stuClass'];
-        $data['ID_Number'] = $_POST['stuIDNum'];
-        $data['Major'] = $_POST['stuMajor'];
+            //接收输入数据
+            $data['Name'] = $_POST['stuName'];
+            $data['Age'] = $_POST['stuAge'];
+            $data['Nationality'] = $_POST['stuNationality'];
+            $data['Politic'] = $_POST['stuPolitic'];
+            $data['Job'] = $_POST['stuJob'];
+            $data['Gender'] = $_POST['stuGender'];
+            $data['DateOfBirth'] = $_POST['stuDateOfBirth'];
+            $data['BirthPlace'] = $_POST['stuBirthPlace'];
+            $data['Home_addr'] = $_POST['stuHomeAddr'];
+            $data['Class_ID'] = $_POST['stuClass'];
+            $data['ID_Number'] = $_POST['stuIDNum'];
+            $data['Major'] = $_POST['stuMajor'];
 
-        //拼接SQL语句
-        $sql = "insert into `Student` set ";
-        foreach($data as $k=>$v){
-            $sql .= "`$k`='$v',";
+            return $this->InsertData('Student',$data);
+        } else {
+            return false;
         }
-        $sql = rtrim($sql,','); //去掉最右边的逗号
-        //执行SQL并返回
-        return $this->db->query($sql);
-    }
-
-    /**
-     * 生成随机字符串，此处作加密掩码用。
-     * @param int $len 生成字符串的长度
-     * @return string $output 随机的字符串
-     */
-    private function genRandomString($len) {
-        //字符表
-        $chars = array(
-            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
-            "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
-            "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G",
-            "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
-            "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2",
-            "3", "4", "5", "6", "7", "8", "9"
-        );
-        $charsLen = count($chars) - 1;
-        shuffle($chars); // 将数组打乱
-
-        $output = "";
-        for ($i=0; $i<$len; $i++) {
-            $output .= $chars[mt_rand(0, $charsLen)];
-        }
-        return $output;
     }
 
     /**
@@ -300,15 +226,7 @@ class mainModel extends model {
             $data['ID_Number'] = $_POST['stuIDNum'];
             $data['Major'] = $_POST['stuMajor'];
 
-            //拼接SQL语句
-            $sql = "update `Student` set ";
-            foreach($data as $k=>$v){
-                $sql .= "`$k`='$v',";
-            }
-            $sql = rtrim($sql,','); //去掉最右边的逗号
-            $sql .="where ID={$_POST['stuID']}";
-            //执行SQL并返回
-            return $this->db->query($sql);
+            return $this->UpdateData('Student',$data,'ID',$_POST['stuID']);
         } else {
             return false;
         }
@@ -321,8 +239,7 @@ class mainModel extends model {
      */
     public function deleteStudent($studentID){
         if (isset($studentID)){
-            $sql = "DELETE FROM Student WHERE ID={$studentID}";
-            return $this->db->query($sql);
+            return $this->DeleteData('Student','ID',$studentID);
         } else {
             return false;
         }
@@ -339,8 +256,7 @@ class mainModel extends model {
             if ($check_data['Name'] == 'admin'){//防止admin账号被删除
                 return false;
             } else {
-                $sql = "DELETE FROM AdminUser WHERE ID={$adminID}";
-                return $this->db->query($sql);
+                return $this->DeleteData('AdminUser','ID',$adminID);
             }
         } else {
             return false;
@@ -354,8 +270,7 @@ class mainModel extends model {
      */
     public function deleteClass($classID){
         if (isset($classID)){
-            $sql = "DELETE FROM Class WHERE ID={$classID}";
-            return $this->db->query($sql);
+            return $this->DeleteData('Class','ID',$classID);
         } else {
             return false;
         }
@@ -368,10 +283,97 @@ class mainModel extends model {
      */
     public function deleteCourse($courseID){
         if (isset($courseID)){
-            $sql = "DELETE FROM Course WHERE ID={$courseID}";
+//            $sql = "DELETE FROM Course WHERE ID={$courseID}";
+//            return $this->db->query($sql);
+            return $this->DeleteData('Course','ID',$courseID);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 往数据表中插入数据
+     * @param string $tableName 表名
+     * @param array $data 插入表的数据
+     * @return bool
+     */
+    private function InsertData($tableName,$data){
+        if (isset($tableName) && isset($data)){
+            //拼接SQL语句
+            $sql = "insert into {$tableName} set ";
+            foreach($data as $k=>$v){
+                $sql .= "`$k`='$v',";
+            }
+            $sql = rtrim($sql,','); //去掉最右边的逗号
+            //执行SQL并返回
             return $this->db->query($sql);
         } else {
             return false;
         }
+    }
+
+    /**
+     * 根据关键字段名及值，更新数据表中的数据
+     * @param string $tableName 表名
+     * @param array $data 要更新的数据
+     * @param string $colName 关键字段名
+     * @param mixed $key 关键值
+     * @return bool
+     */
+    private function UpdateData($tableName,$data,$colName,$key){
+        if (isset($tableName) && isset($data) && isset($colName) && isset($key)){
+            //拼接SQL语句
+            $sql = "update {$tableName} set ";
+            foreach($data as $k=>$v){
+                $sql .= "`$k`='$v',";
+            }
+            $sql = rtrim($sql,','); //去掉最右边的逗号
+            $sql .="where {$colName}={$key}";
+            //执行SQL并返回
+            return $this->db->query($sql);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 根据所提供的字段名及对应值，删除数据表中对应的数据
+     * @param string $tableName 表名
+     * @param string $colName 关键字段名
+     * @param mixed $key 关键值
+     * @return bool
+     */
+    private function DeleteData($tableName,$colName,$key){
+        if (isset($tableName) && isset($colName) && isset($key)){
+            $sql = "DELETE FROM {$tableName} WHERE {$colName}={$key}";
+            return $this->db->query($sql);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 生成随机字符串，此处作生成加密掩码用。
+     * @param int $len 生成字符串的长度
+     * @return string $output 随机的字符串
+     */
+    private function genRandomString($len) {
+        //字符表
+        $chars = array(
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
+            "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
+            "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G",
+            "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+            "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2",
+            "3", "4", "5", "6", "7", "8", "9"
+        );
+        $charsLen = count($chars) - 1;
+        shuffle($chars); // 将数组打乱
+
+        $output = "";
+        for ($i=0; $i<$len; $i++) {
+            $output .= $chars[mt_rand(0, $charsLen)];
+        }
+        return $output;
     }
 }

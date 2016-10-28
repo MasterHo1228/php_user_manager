@@ -204,7 +204,6 @@
             var usrPasswd = $("#usrPasswd").val();
             var usrRole = $("#usrRole").val();
             if (usrName != "" && usrPasswd!="" && usrRole!="") {
-                alert('start!');
                 $.ajax({
                     url: "index.php?p=admin&c=main&a=addAdmin",
                     type:'post',
@@ -214,7 +213,6 @@
                         usrRole:usrRole
                     },
                     success: function (data) {
-                        alert('got it!');
                         if (data == 'true') {
                             $("#alertHintContent").empty().append("添加成功！");
                             $("#alertHint").modal({
