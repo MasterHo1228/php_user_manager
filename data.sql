@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS Class(
     ID INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
     Grade YEAR NOT NULL ,
     Name VARCHAR(30) NOT NULL ,
-    Sum_students INT UNSIGNED NOT NULL ,
     Max_students INT UNSIGNED NOT NULL
 );
 
@@ -94,3 +93,25 @@ CREATE VIEW viewStudentScore AS
     b.Student_ID=a.ID
   AND
     b.Course_ID = c.ID;
+
+INSERT INTO Class SET Name='软件151',Grade=2015,Max_students=50;
+INSERT INTO Class SET Name='软件152',Grade=2015,Max_students=50;
+INSERT INTO Class SET Name='软件153',Grade=2015,Max_students=50;
+
+INSERT INTO Course SET Name='PHP动态编程',Credit=2;
+INSERT INTO Course SET Name='MySQL数据库',Credit=1.5;
+INSERT INTO Course SET Name='Java编程基础',Credit=1;
+
+INSERT INTO Student SET Name='张三',Gender='male',Class_ID=1;
+INSERT INTO Student SET Name='李四',Gender='male',Class_ID=2;
+INSERT INTO Student SET Name='王五',Gender='male',Class_ID=3;
+INSERT INTO Student SET Name='赵妍',Gender='female',Class_ID=3;
+INSERT INTO Student SET Name='陈七',Gender='male',Class_ID=1;
+INSERT INTO Student SET Name='李八',Gender='male',Class_ID=2;
+
+INSERT INTO Student_score SET Student_ID=1,Course_ID=1,Score=90,School_year=2015,Semester=1;
+INSERT INTO Student_score SET Student_ID=5,Course_ID=1,Score=65,School_year=2015,Semester=1;
+INSERT INTO Student_score SET Student_ID=2,Course_ID=2,Score=88,School_year=2015,Semester=1;
+INSERT INTO Student_score SET Student_ID=6,Course_ID=2,Score=74,School_year=2015,Semester=1;
+INSERT INTO Student_score SET Student_ID=3,Course_ID=3,Score=93,School_year=2015,Semester=1;
+INSERT INTO Student_score SET Student_ID=4,Course_ID=3,Score=81,School_year=2015,Semester=1;
