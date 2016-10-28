@@ -27,6 +27,7 @@ class mainModel extends model {
             $data['salt'] = $this->genRandomString(4);
             $data['Password'] = $_POST['usrPasswd'].$data['salt'];
 
+            //写入数据
             return $this->InsertData('AdminUser',$data);
         } else {
             return false;
@@ -85,6 +86,7 @@ class mainModel extends model {
         $data['Grade'] = $_POST['classGrade'];
         $data['Max_students'] = $_POST['classMaxCount'];
 
+        //写入数据
         return $this->InsertData('Class',$data);
     }
 
@@ -100,6 +102,7 @@ class mainModel extends model {
         $data['Name'] = $_POST['courseName'];
         $data['Credit'] = $_POST['courseCredit'];
 
+        //写入数据
         return $this->InsertData('Course',$data);
     }
 
@@ -124,6 +127,7 @@ class mainModel extends model {
                 $ins_data['Semester'] = $_POST['semester'];
                 $ins_data['School_year'] = $_POST['schoolYear'];
 
+                //写入数据
                 return $this->InsertData('Student_score',$ins_data);
             } else {
                 echo '学生不存在！';
@@ -149,6 +153,7 @@ class mainModel extends model {
             $data['Grade'] = $_POST['classGrade'];
             $data['Max_students'] = $_POST['classMaxCount'];
 
+            //更新数据
             return $this->UpdateData('Class',$data,'ID',$_POST['classID']);
         } else {
             return false;
@@ -168,6 +173,7 @@ class mainModel extends model {
             $data['Name'] = $_POST['courseName'];
             $data['Credit'] = $_POST['courseCredit'];
 
+            //更新数据
             return $this->UpdateData('Course',$data,'ID',$_POST['courseID']);
         } else {
             return false;
@@ -197,6 +203,7 @@ class mainModel extends model {
             $data['ID_Number'] = $_POST['stuIDNum'];
             $data['Major'] = $_POST['stuMajor'];
 
+            //写入数据
             return $this->InsertData('Student',$data);
         } else {
             return false;
@@ -226,6 +233,7 @@ class mainModel extends model {
             $data['ID_Number'] = $_POST['stuIDNum'];
             $data['Major'] = $_POST['stuMajor'];
 
+            //更新数据
             return $this->UpdateData('Student',$data,'ID',$_POST['stuID']);
         } else {
             return false;
@@ -239,6 +247,7 @@ class mainModel extends model {
      */
     public function deleteStudent($studentID){
         if (isset($studentID)){
+            //删除数据
             return $this->DeleteData('Student','ID',$studentID);
         } else {
             return false;
@@ -256,6 +265,7 @@ class mainModel extends model {
             if ($check_data['Name'] == 'admin'){//防止admin账号被删除
                 return false;
             } else {
+                //删除数据
                 return $this->DeleteData('AdminUser','ID',$adminID);
             }
         } else {
@@ -270,6 +280,7 @@ class mainModel extends model {
      */
     public function deleteClass($classID){
         if (isset($classID)){
+            //删除数据
             return $this->DeleteData('Class','ID',$classID);
         } else {
             return false;
@@ -283,8 +294,7 @@ class mainModel extends model {
      */
     public function deleteCourse($courseID){
         if (isset($courseID)){
-//            $sql = "DELETE FROM Course WHERE ID={$courseID}";
-//            return $this->db->query($sql);
+            //删除数据
             return $this->DeleteData('Course','ID',$courseID);
         } else {
             return false;
