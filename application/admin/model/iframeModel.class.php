@@ -19,8 +19,8 @@ class iframeModel extends model{
     public function getLastLoginData(){
         if (isset($_SESSION['admin_id'])){
             $adminID = $_SESSION['admin_id'];
-            $sql = "SELECT `LastLoginTime`,`LastLoginIP` FROM `AdminUserLoginLog` WHERE `AdminID`={$adminID} ORDER BY `LastLoginTime` DESC LIMIT 1,1 ;";
-            $data = $this->db->fetchAll($sql);
+            $sql = "SELECT LastLoginTime,LastLoginIP FROM AdminUserLoginLog WHERE AdminID=:adminID ORDER BY LastLoginTime DESC LIMIT 1,1 ;";
+            $data = $this->db->fetchAll($sql,array(':adminID'=>$adminID));
             return $data;
         } else {
             return false;
@@ -32,7 +32,7 @@ class iframeModel extends model{
      * @return bool
      */
     public function getSimpleClassList(){
-        $sql = "SELECT `ID`,`Name` FROM Class ;";
+        $sql = "SELECT ID,Name FROM Class ;";
         $data = $this->db->fetchAll($sql);
         return $data;
     }
@@ -43,8 +43,8 @@ class iframeModel extends model{
      * @return mixed $data 班级数据
      */
     public function getCurrentClassList($classID){
-        $sql = "SELECT `ID`,`Name`,`Grade`,`Max_students` FROM Class WHERE `ID`={$classID} ;";
-        $data = $this->db->fetchRow($sql);
+        $sql = "SELECT ID,Name,Grade,Max_students FROM Class WHERE ID=:classID ;";
+        $data = $this->db->fetchRow($sql,array(':classID'=>$classID));
         return $data;
     }
 
@@ -53,7 +53,7 @@ class iframeModel extends model{
      * @return mixed $data 班级数据
      */
     public function getFullClassList(){
-        $sql = "SELECT `ID`,`Name`,`Grade`,`Max_students` FROM Class ;";
+        $sql = "SELECT ID,Name,Grade,Max_students FROM Class ;";
         $data = $this->db->fetchAll($sql);
         return $data;
     }
@@ -63,7 +63,7 @@ class iframeModel extends model{
      * @return mixed $data 课程数据
      */
     public function getSimpleCourseList(){
-        $sql = "SELECT `ID`,`Name` FROM Course ;";
+        $sql = "SELECT ID,Name FROM Course ;";
         $data = $this->db->fetchAll($sql);
         return $data;
     }
@@ -73,7 +73,7 @@ class iframeModel extends model{
      * @return mixed $data 课程数据
      */
     public function getCourseList(){
-        $sql = "SELECT `ID`,`Name`,`Credit` FROM Course ;";
+        $sql = "SELECT ID,Name,Credit FROM Course ;";
         $data = $this->db->fetchAll($sql);
         return $data;
     }
@@ -85,8 +85,8 @@ class iframeModel extends model{
      */
     public function getCourseInfo($courseID){
         if (isset($courseID)){
-            $sql = "SELECT `ID`,`Name`,`Credit` FROM Course WHERE `ID`={$courseID};";
-            $data = $this->db->fetchRow($sql);
+            $sql = "SELECT ID,Name,Credit FROM Course WHERE ID=:courseID;";
+            $data = $this->db->fetchRow($sql,array(':courseID'=>$courseID));
             return $data;
         } else {
             return false;
@@ -98,7 +98,7 @@ class iframeModel extends model{
      * @return mixed $data 成绩数据
      */
     public function getScoreList(){
-        $sql = "SELECT `Student_ID`,`StudentName`,`ClassName`,`CourseName`,`Score`,`School_year`,`Semester` FROM viewStudentScore ;";
+        $sql = "SELECT Student_ID,StudentName,ClassName,CourseName,Score,School_year,Semester FROM viewStudentScore ;";
         $data = $this->db->fetchAll($sql);
         return $data;
     }
@@ -108,7 +108,7 @@ class iframeModel extends model{
      * @return mixed
      */
     public function getStudentIndexList(){
-        $sql = "SELECT `ID`,`StudentName`,`Gender`,`ClassName` FROM viewStudentInfos ;";
+        $sql = "SELECT ID,StudentName,Gender,ClassName FROM viewStudentInfos ;";
         $data = $this->db->fetchAll($sql);
         return $data;
     }
@@ -120,8 +120,8 @@ class iframeModel extends model{
      */
     public function getStudentAllInfo($studentID){
         if (isset($studentID)){
-            $sql = "SELECT ID,StudentName,Gender,Age,DateOfBirth,BirthPlace,Nationality,ClassName,Home_addr,Politic,ID_Number,Job,Major FROM viewStudentInfos WHERE ID={$studentID};";
-            $data = $this->db->fetchRow($sql);
+            $sql = "SELECT ID,StudentName,Gender,Age,DateOfBirth,BirthPlace,Nationality,ClassName,Home_addr,Politic,ID_Number,Job,Major FROM viewStudentInfos WHERE ID=:studentID;";
+            $data = $this->db->fetchRow($sql,array(':studentID'=>$studentID));
             return $data;
         } else {
             return false;
@@ -133,7 +133,7 @@ class iframeModel extends model{
      * @return mixed $data 管理员基本信息数据
      */
     public function getAdminList(){
-        $sql = "SELECT `ID`,`Name`,`User_role` FROM AdminUser ;";
+        $sql = "SELECT ID,Name,User_role FROM AdminUser ;";
         $data = $this->db->fetchAll($sql);
         return $data;
     }
@@ -145,8 +145,8 @@ class iframeModel extends model{
      */
     public function getAdminInfo($adminID){
         if (isset($adminID)){
-            $sql = "SELECT `ID`,`Name`,`User_role` FROM AdminUser WHERE ID={$adminID};";
-            $data = $this->db->fetchRow($sql);
+            $sql = "SELECT ID,Name,User_role FROM AdminUser WHERE ID=:adminID;";
+            $data = $this->db->fetchRow($sql,array(':adminID'=>$adminID));
             return $data;
         } else {
             return false;

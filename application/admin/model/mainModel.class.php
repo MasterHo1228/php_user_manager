@@ -55,7 +55,7 @@ class mainModel extends model {
             //往管理员表中插入数据
             //此处的sql代码需要特殊验证，故不用api~
             //拼接SQL语句
-            $sql = "update `AdminUser` set ";
+            $sql = "update AdminUser set ";
             foreach($data as $k=>$v){
                 if ($k == 'Password'){
                     $sql .= "`$k`=MD5('$v'),";

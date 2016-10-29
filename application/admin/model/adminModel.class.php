@@ -22,7 +22,7 @@ class adminModel extends model {
         $username = $_POST['usrName'];
         $password = $_POST['usrPasswd'];
 
-        $sql = 'SELECT `ID`,`User_role`,`Password`,`salt` FROM `adminuser` WHERE `Name`=:username ;';
+        $sql = 'SELECT ID,User_role,Password,salt FROM AdminUser WHERE Name=:username ;';
         $data = $this->db->fetchRow($sql,array(':username'=>$username));
         if (!$data){
             return false;
