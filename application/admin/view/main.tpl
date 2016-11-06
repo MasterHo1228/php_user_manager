@@ -53,7 +53,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">学生管理系统</a>
+                <a class="navbar-brand" href="index.php?p=admin&c=main&a=main">学生管理系统</a>
             </div>
             <!-- /.navbar-header -->
 
