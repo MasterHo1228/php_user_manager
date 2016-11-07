@@ -5,3 +5,5 @@ UI Template：[StartBootstrap Admin 2](https://startbootstrap.com/template-overv
 
 后台登录账户名：admin
 密码：123456
+
+[在线示例链接](http://masterho1228.top/user_manager)
